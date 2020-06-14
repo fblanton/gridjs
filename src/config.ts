@@ -3,6 +3,7 @@ import Storage from './storage/storage';
 import Pipeline from './pipeline/pipeline';
 import Tabular from './tabular';
 import { SearchConfig } from './view/plugin/search/search';
+import { RowConfig } from './view/plugin/row';
 import { PaginationConfig } from './view/plugin/pagination';
 import Header from './header';
 import { ServerStorageOptions } from './storage/server';
@@ -33,11 +34,13 @@ export interface Config {
   pagination: PaginationConfig;
   sort: GenericSortConfig;
   translator: Translator;
+  row: RowConfig;
 }
 
 // Config type used by the consumers
 interface UserConfigExtend {
   columns?: OneDArray<TColumn> | OneDArray<string>;
+  row?: RowConfig;
   search: SearchConfig | boolean;
   pagination: PaginationConfig | boolean;
   // implicit option to enable the sort plugin globally
@@ -65,6 +68,7 @@ export class Config {
     return {
       width: '100%',
       autoWidth: true,
+      row: { onClick: undefined },
     } as Config;
   }
 

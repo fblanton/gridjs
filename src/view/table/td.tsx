@@ -1,4 +1,4 @@
-import { ComponentChild, h } from 'preact';
+import { ComponentChild, h, JSX } from 'preact';
 
 import Cell from '../../cell';
 import { BaseComponent, BaseProps } from '../base';
@@ -12,6 +12,7 @@ export interface TDProps extends BaseProps {
   column?: TColumn;
   colSpan?: number;
   className?: string;
+  onClick?: (event: JSX.TargetedMouseEvent<HTMLElement>) => void;
 }
 
 export class TD extends BaseComponent<TDProps, {}> {
@@ -35,6 +36,7 @@ export class TD extends BaseComponent<TDProps, {}> {
       <td
         colSpan={this.props.colSpan}
         className={classJoin(className('td'), this.props.className)}
+        onClick={this.props.onClick}
       >
         {this.content()}
       </td>
